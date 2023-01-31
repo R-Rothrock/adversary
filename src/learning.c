@@ -33,19 +33,44 @@ int predict(int[] historical_moves)
   }
 
   // getting percentages
-  int percent_rock     = (int)total_rock_played / move_count;
-  int percent_paper    = (int)total_paper_played / move_count;
-  int percent_scissors = (int)total_scissors_played / move_count;
+  int percent_rock     = (int)total_rock_played / move_count * 10;
+  int percent_paper    = (int)total_paper_played / move_count * 10;
+  int percent_scissors = (int)total_scissors_played / move_count * 10;
 
   // calculating the most used option
   // returning it, as well
+
+  // because I don't want the program to keep guessing rock when its
+  // opponent keeps doing paper, I'm adding a slight randomization to
+  // the prediction, making it's predictions closer to an "educated
+  // guess" much like another person playing rock paper scissors.
+
+  time_t t;
+  srand((unsigned) time(&t));
+
+  // increases an random option by %15
+
+  const unsigned int factor = 15;
+
+  switch(rand() % 2 + 1)
+  {
+    case 1:
+      percent_rock + factor;
+      break;
+    case 2:
+      percent_paper + factor;
+      break;
+    case 3:
+      percent_scissors + factor;
+      break;
+  }
 
   if(percent_rock == percent_paper && percent_paper == percent_scissors)
   {
     // all values are the same, just choose randomly
     time_t t;
     srand((unsigned) time(&t));
-    return(rand( % 2) + 1);
+    return(rand() % 2 + 1);
   }
 
   if(percent_rock > percent_paper)
@@ -61,5 +86,4 @@ int predict(int[] historical_moves)
     else
       return(SCISSORS);
   }
-
 }

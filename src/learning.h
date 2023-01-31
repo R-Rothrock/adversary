@@ -4,4 +4,4 @@
 
 #include<rules.h>
 
-int predict(*int[] historical_moves);
+int predict(int[] historical_moves);

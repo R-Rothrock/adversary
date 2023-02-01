@@ -52,7 +52,7 @@ int predict(int[] historical_moves)
 
   const unsigned int factor = 15;
 
-  switch(rand() % 2 + 1)
+  switch(rand() % 3 + 1)
   {
     case 1:
       percent_rock + factor;
@@ -70,7 +70,7 @@ int predict(int[] historical_moves)
     // all values are the same, just choose randomly
     time_t t;
     srand((unsigned) time(&t));
-    return(rand() % 2 + 1);
+    return(rand() % 3 + 1);
   }
 
   if(percent_rock > percent_paper)

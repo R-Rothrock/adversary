@@ -1,7 +1,9 @@
 // rules.c
 // rules for rock paper scissors
 
-#include<rules.h>
+#define ROCK 1
+#define PAPER 2
+#define SCISSORS 3
 
 int eval(int player1_move, int player2_move)
 {

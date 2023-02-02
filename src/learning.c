@@ -1,6 +1,8 @@
 //learning.c
 
-#include<learning.h>
+#include<stdlib.h>
+
+#include "rules.c"
 
 int predict(int[] historical_moves)
 {
@@ -79,6 +81,7 @@ int predict(int[] historical_moves)
       return(ROCK);
     else
       return(SCISSORS);
+
   } else
   {
     if(percent_paper > percent_scissors)

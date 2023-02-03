@@ -5,9 +5,8 @@
 #include<iostream>
 #include<vector>
 
-#define ROCK     1
-#define PAPER    2
-#define SCISSORS 3
+#include "bot.cpp"
+#include "rules.cpp"
 
 using namespace std;
 
@@ -37,14 +36,33 @@ int play_round(int guess)
       break;
   }
 
-  if(guess == computer_guess)
+  playerhistory.push_back(guess); // add current guess to guess history
+
+  return(eval(guess, computer_guess));
+}
+
+int main()
+{
+  /* The main function isn't very special, as you can see.
+   * This is mostly designed for the Python API in the `test`
+   * directory.
+   */
+  
+  int in;
+  cout << "What do you play: [1: Rock; 2: Paper; 3: Scissors]: ";
+  in = (int)getchar(); // this might crash the program. Just FYI.
+
+  switch(play_round(in))
   {
-    return(3); // tie
-  } else if(computer_guess == guess++ || guess == SCISSORS && computer_guess == ROCK)
-  {
-    return(1); // computer wins
-  } else if(computer_guess == guess-- || guess == ROCK && computer_guess == SCISSORS)
-  {
-    return(2); // player wins (:
+    case 1:
+      cout << "You lose!";
+      break;
+    case 2:
+      cout << "You win!";
+      break;
+    case 3:
+      cout << "Tie!";
+      break;
   }
+
 }

@@ -2,11 +2,15 @@
 
 #include<cstdlib>
 #include<iostream>
+#include<string>
 #include<vector>
 
-#include "bot.cpp"
-
 using namespace std;
+
+#include "bot.hpp"
+#include "rules.hpp"
+
+using namespace rules;
 
 vector<int> player_history;
 
@@ -18,7 +22,9 @@ int play_round(int guess)
    */
 
   int computer_guess;
-  switch(predict(player_history))
+  int prediction_ret = bot::predict(player_history);
+  cout << "prediction ret: " << prediction_ret << endl;
+  switch(bot::predict(player_history))
   {
     case ROCK:
       computer_guess = PAPER;
@@ -34,7 +40,7 @@ int play_round(int guess)
   player_history.push_back(guess); // add current guess to guess history
 
   int ret = eval(guess, computer_guess);
-  //cout << ret;
+  cout << "Return of evaluation: " << ret << endl;
   return(ret);
 }
 
@@ -48,12 +54,18 @@ int main()
   char ch;
   int nr;
 
-  cout << "What do you play: [1: Rock; 2: Paper; 3: Scissors]: ";
-  ch = getchar();
-  nr = (int)ch;
-  
+  while(true)
+  {
+    cout << "What do you play: [1: Rock; 2: Paper; 3: Scissors]: ";
+    ch = getchar();
+    cout << "char inputed: " << ch << endl;
+    nr = (int)ch;
+    if(nr)
+      break;
+  }
 
-  switch(play_round(nr))
+  int ret = play_round(nr);
+  switch(ret)
   {
     case 1:
       cout << "You lose!\n";

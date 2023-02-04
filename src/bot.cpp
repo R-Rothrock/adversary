@@ -1,24 +1,25 @@
 // bot.cpp
 
 #include<cstdlib>
+#include<iostream>
 #include<vector>
 
 #include "rules.cpp"
 
+using namespace std;
+
 inline int predict(vector<int> guess_history)
 {
   // if history is empty, simple choose randomly
-  if(guess_history.size() == NULL)
+  if(guess_history.size() == 0)
   {
     return(std::rand() % 3 + 1);
   }
 
-  vector<int>::const_interator iter;
-
   unsigned int rock_count, paper_count, scissors_count;
-  for(iter = guess_history.begin(); iter != guess_history.end(); iter++)
+  for(int i : guess_history)
   {
-    match(*iter)
+    switch(i)
     {
       case 1:
         rock_count++;
@@ -35,6 +36,10 @@ inline int predict(vector<int> guess_history)
   int percentage_rock     = rock_count / guess_history.size() * 100;
   int percentage_paper    = paper_count / guess_history.size() * 100;
   int percentage_scissors = scissors_count / guess_history.size() * 100;
+
+  cout << percentage_rock << endl;
+  cout << percentage_paper << endl;
+  cout << percentage_scissors << endl;
 
   // Because Rock Paper Scissors is generally more randomized than
   // doing basic math, and because guesses are also better educated

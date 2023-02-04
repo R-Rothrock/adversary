@@ -1,12 +1,10 @@
 // main.cpp
 
-#include<cassert>
 #include<cstdlib>
 #include<iostream>
 #include<vector>
 
 #include "bot.cpp"
-#include "rules.cpp"
 
 using namespace std;
 
@@ -19,10 +17,7 @@ int play_round(int guess)
    * 3: Tie
    */
 
-  assert(guess == ROCK || guess == PAPER || guess == SCISSORS);
-
   int computer_guess;
-  
   switch(predict(player_history))
   {
     case ROCK:
@@ -36,9 +31,11 @@ int play_round(int guess)
       break;
   }
 
-  playerhistory.push_back(guess); // add current guess to guess history
+  player_history.push_back(guess); // add current guess to guess history
 
-  return(eval(guess, computer_guess));
+  int ret = eval(guess, computer_guess);
+  //cout << ret;
+  return(ret);
 }
 
 int main()
@@ -48,20 +45,24 @@ int main()
    * directory.
    */
   
-  int in;
-  cout << "What do you play: [1: Rock; 2: Paper; 3: Scissors]: ";
-  in = (int)getchar(); // this might crash the program. Just FYI.
+  char ch;
+  int nr;
 
-  switch(play_round(in))
+  cout << "What do you play: [1: Rock; 2: Paper; 3: Scissors]: ";
+  ch = getchar();
+  nr = (int)ch;
+  
+
+  switch(play_round(nr))
   {
     case 1:
-      cout << "You lose!";
+      cout << "You lose!\n";
       break;
     case 2:
-      cout << "You win!";
+      cout << "You win!\n";
       break;
     case 3:
-      cout << "Tie!";
+      cout << "Tie!\n";
       break;
   }
 

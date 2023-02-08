@@ -10,9 +10,14 @@ using namespace std;
 #include "bot.hpp"
 #include "rules.hpp"
 
+using namespace bot;
 using namespace rules;
 
-vector<int> player_history;
+vector<int> HISTORY;
+
+#define ROCK 1
+#define PAPER 2
+#define SCISSORS 3
 
 int play_round(int guess)
 {
@@ -22,9 +27,9 @@ int play_round(int guess)
    */
 
   int computer_guess;
-  int prediction_ret = bot::predict(player_history);
+  int prediction_ret = predict(HISTORY);
   cout << "prediction ret: " << prediction_ret << endl;
-  switch(bot::predict(player_history))
+  switch(prediction_ret)
   {
     case ROCK:
       computer_guess = PAPER;
@@ -37,7 +42,7 @@ int play_round(int guess)
       break;
   }
 
-  player_history.push_back(guess); // add current guess to guess history
+  HISTORY.push_back(guess); // add current guess to guess history
 
   int ret = eval(guess, computer_guess);
   cout << "Return of evaluation: " << ret << endl;
@@ -53,7 +58,6 @@ int main()
   
   char ch;
   int nr;
-
   while(true)
   {
     cout << "What do you play: [1: Rock; 2: Paper; 3: Scissors]: ";
@@ -75,6 +79,9 @@ int main()
       break;
     case 3:
       cout << "Tie!\n";
+      break;
+    default:
+      cout << "Something doesn't work...\n";
       break;
   }
 

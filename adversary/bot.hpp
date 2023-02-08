@@ -1,7 +1,7 @@
 // bot.cpp
 
 #include<cstdlib>
-#include<iostream>
+#include<time.h>
 #include<vector>
 
 using namespace std;
@@ -14,8 +14,11 @@ namespace bot
     // if history is empty, simple choose randomly
     if(guess_history.size() == 0)
     {
+      // 1 = ROCK, 2 = PAPER, 3 = SCISSORS
+      srand(time(0));
       return(rand() % 3 + 1);
     }
+    //cout << endl << guess_history.size() << endl;
 
     unsigned int rock_count, paper_count, scissors_count;
     for(int i : guess_history)
@@ -37,10 +40,6 @@ namespace bot
     int percentage_rock     = rock_count / guess_history.size() * 100;
     int percentage_paper    = paper_count / guess_history.size() * 100;
     int percentage_scissors = scissors_count / guess_history.size() * 100;
-
-    cout << percentage_rock << endl;
-    cout << percentage_paper << endl;
-    cout << percentage_scissors << endl;
 
     // Because Rock Paper Scissors is generally more randomized than
     // doing basic math, and because guesses are also better educated
@@ -77,11 +76,6 @@ namespace bot
         break;
     }
     cout << guess_history[guess_history.size() - 1];
-
-    // returning whatever percentage is larger.
-    // note: this will technically be most likely to output scissors, so
-    // scissors will be decremented 5%
-    percentage_scissors -= 5;
 
     if(percentage_rock > percentage_paper && percentage_rock > percentage_scissors)
     {

@@ -2,9 +2,6 @@
 
 namespace rules
 {
-  #define ROCK 1
-  #define PAPER 2
-  #define SCISSORS 3
 
   inline int eval(int guess, int computer_guess)
   {

@@ -1,4 +1,4 @@
-// main.cpp
+// adversary.cpp
 
 #include<cstdlib>
 #include<iostream>
@@ -46,6 +46,9 @@ int play_round(int guess)
 
   int ret = eval(guess, computer_guess);
   cout << "Return of evaluation: " << ret << endl;
+  free(&computer_guess);
+  free(&guess);
+  free(&prediction_ret);
   return(ret);
 }
 

@@ -18,7 +18,7 @@ namespace rules
         else if(computer_guess == 3)
           return(2);
         else
-          return(0);
+          return(3);
         break;
       case 2:
         if(computer_guess == 1)
@@ -26,7 +26,7 @@ namespace rules
         else if(computer_guess == 3)
           return(1);
         else
-          return(0);
+          return(3);
         break;
       case 3:
         if(computer_guess == 1)
@@ -34,7 +34,7 @@ namespace rules
         else if(computer_guess == 2)
           return(2);
         else
-          return(0);
+          return(3);
         break;
       default:
         if(guess == computer_guess)

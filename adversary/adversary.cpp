@@ -3,6 +3,7 @@
 #include<cstdlib>
 #include<iostream>
 #include<string>
+#include<unistd.h>
 #include<vector>
 
 using namespace std;
@@ -51,39 +52,47 @@ int play_round(int guess)
   return(ret);
 }
 
+//*
+
 int main()
 {
   // The main function isn't very special, as you can see.
   // This is mostly designed for the Python API in the `test`
   // directory.
-  //
-  
-  char ch;
-  int nr;
+
   while(true)
   {
-    cout << "What do you play: [1: Rock; 2: Paper; 3: Scissors]: ";
-    ch = getchar();
-    //cout << "char inputed: " << ch << endl;
-    nr = (int)ch % 3; // luckily the modulo works.
-    if(nr)
-      break;
-  }
-  int ret = play_round(nr);
-  switch(ret)
-  {
-    case 1:
-      cout << "You lose!\n";
-      break;
-    case 2:
-      cout << "You win!\n";
-      break;
-    case 3:
-      cout << "Tie!\n";
-      break;
-    default:
-      cout << "Something doesn't work...\n";
-      break;
-  }
+    string in;
+    int nr;
+    while(true)
+    {
+      cout << "What do you play: [1: Rock; 2: Paper; 3: Scissors]: ";
+      cin >> in;
+      nr = stoi(in);
+      if(nr)
+        break;
+      sleep(0.2); // problems with loop on codespace; little pause helps.
+    }
 
+    //cout << nr;
+
+    int ret = play_round(nr);
+    switch(ret)
+    {
+      case 1:
+        cout << "You lose!\n";
+        break;
+      case 2:
+        cout << "You win!\n";
+        break;
+      case 3:
+        cout << "Tie!\n";
+        break;
+      default:
+        cout << "Something doesn't work...\n";
+        break;
+    }
+  }
 }
+
+//*/

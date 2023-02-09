@@ -75,7 +75,7 @@ namespace bot
         percentage_scissors -= factor;
         break;
     }
-    cout << guess_history[guess_history.size() - 1];
+    //cout << guess_history[guess_history.size() - 1];
 
     if(percentage_rock > percentage_paper && percentage_rock > percentage_scissors)
     {

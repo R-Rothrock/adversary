@@ -44,19 +44,19 @@ int play_round(int guess)
 
   HISTORY.push_back(guess); // add current guess to guess history
 
-  cout << "guess: " << guess << endl;
-  cout << "computer guess: " << computer_guess << endl;
+  //cout << "guess: " << guess << endl;
+  //cout << "computer guess: " << computer_guess << endl;
   int ret = eval(guess, computer_guess);
-  cout << "Return of evaluation: " << ret << endl;
+  //cout << "Return of evaluation: " << ret << endl;
   return(ret);
 }
 
 int main()
 {
-  /* The main function isn't very special, as you can see.
-   * This is mostly designed for the Python API in the `test`
-   * directory.
-   */
+  // The main function isn't very special, as you can see.
+  // This is mostly designed for the Python API in the `test`
+  // directory.
+  //
   
   char ch;
   int nr;
@@ -64,12 +64,11 @@ int main()
   {
     cout << "What do you play: [1: Rock; 2: Paper; 3: Scissors]: ";
     ch = getchar();
-    cout << "char inputed: " << ch << endl;
-    nr = (int)ch;
+    //cout << "char inputed: " << ch << endl;
+    nr = (int)ch % 3; // luckily the modulo works.
     if(nr)
       break;
   }
-
   int ret = play_round(nr);
   switch(ret)
   {

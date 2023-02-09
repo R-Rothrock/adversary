@@ -40,7 +40,7 @@ namespace rules
         if(guess == computer_guess)
           return(3);
         else
-          return(5); // I don't know how we'd get here...
+          return(500); // debug purposes
         break;
     }
   }

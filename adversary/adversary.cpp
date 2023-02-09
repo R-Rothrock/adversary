@@ -44,11 +44,10 @@ int play_round(int guess)
 
   HISTORY.push_back(guess); // add current guess to guess history
 
+  cout << "guess: " << guess << endl;
+  cout << "computer guess: " << computer_guess << endl;
   int ret = eval(guess, computer_guess);
   cout << "Return of evaluation: " << ret << endl;
-  free(&computer_guess);
-  free(&guess);
-  free(&prediction_ret);
   return(ret);
 }
 

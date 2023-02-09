@@ -42,11 +42,11 @@ namespace bot
     int percentage_scissors = scissors_count / guess_history.size() * 100;
 
     // Because Rock Paper Scissors is generally more randomized than
-    // doing basic math, and because guesses are also better educated
-    // than basic math, a factor of 20% will be added to a random guess.
+    // doing basic math, a factor of 20% will be added to a random guess.
 
     const unsigned int factor = 20;
 
+    srand(time(0));
     switch(std::rand() % 3 + 1)
     {
       case 1:

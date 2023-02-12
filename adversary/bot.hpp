@@ -41,9 +41,9 @@ namespace bot
       }
     }
   
-    cout << rock_count << endl;
-    cout << paper_count << endl;
-    cout << scissors_count << endl;
+    //cout << rock_count << endl;
+    //cout << paper_count << endl;
+    //cout << scissors_count << endl;
 
     int percentage_rock     = rock_count / guess_history.size() * 100;
     int percentage_paper    = paper_count / guess_history.size() * 100;
@@ -52,10 +52,60 @@ namespace bot
     // at the current moment, the algorithm is really mathematically
     // straight forward, but that would be very predictable, and so
     // I want it to be a slight more cunning.
-  
-    cout << percentage_rock << endl;
-    cout << percentage_paper << endl;
-    cout << percentage_scissors << endl;
+
+    const int size = guess_history.size();
+    int factor;
+
+    // If the last three moves are the same, then that same move is likely.
+    // if only the last two moves are the same, then that same move is improbably.
+
+    if(guess_history[size - 1] == guess_history[size - 2])
+    {
+      srand(time(0)); // RNG for factor definition.
+      
+      if(guess_history[size - 1] == guess_history[size - 3])
+      {
+        factor = rand() % 20;
+      } else
+      {
+        factor = rand() % 30;
+      }
+      
+      switch(guess_history[size - 1])
+      {
+        case 1:
+          percentage_rock -= factor;
+          break;
+        case 2:
+          percentage_paper -= factor;
+          break;
+        case 3:
+          percentage_scissors -= factor;
+          break;
+      }
+    }
+
+    // A random number gets a 20% increase.
+    factor = 20;
+    srand(time(0));
+    switch(rand() % 3 + 1)
+    {
+      case 1:
+        percentage_rock += factor;
+        break;
+      case 2:
+        percentage_paper += factor;
+        break;
+      case 3:
+        percentage_scissors += factor;
+        break;
+    }
+
+    // debug help
+    //cout << percentage_rock << endl;
+    //cout << percentage_paper << endl;
+    //cout << percentage_scissors << endl;
+    
     if(percentage_rock > percentage_paper
     && percentage_rock > percentage_scissors)
     {
@@ -64,9 +114,14 @@ namespace bot
     && percentage_paper > percentage_scissors)
     {
       return(2); // paper
-    } else
+    } else if(percentage_scissors > percentage_rock
+    && percentage_scissors > percentage_paper)
     {
       return(3); // scissors
+    } else // all values are even (probably 0) random number.
+    {
+      srand(time(0)); // initialize RNG
+      return(rand() % 3 + 1);
     }
   }
 }

@@ -2,4 +2,4 @@
 # windows people: sorry ):
 # just run with `source compile`
 
-gcc -x c++ -shared -o adversary.so -fPIC ../adversary/adversary.cpp
+gcc -shared -o adversary.so -fPIC ../adversary/adversary.cpp -lstdc++

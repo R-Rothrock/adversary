@@ -71,7 +71,7 @@ int main()
       nr = stoi(in);
       if(nr)
         break;
-      sleep(0.2); // problems with loop on codespace; little pause helps.
+      sleep(0.1); // problems with loop on codespace; little pause helps.
     }
 
     //cout << nr;

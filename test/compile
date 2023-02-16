@@ -1,5 +1,0 @@
-# compiles adversary into a DLL for the Python GUI to use.
-# windows people: sorry ):
-# just run with `source compile`
-
-gcc -shared -o adversary.so -fPIC ../adversary/adversary.cpp -lstdc++

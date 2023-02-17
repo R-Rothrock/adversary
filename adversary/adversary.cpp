@@ -29,7 +29,7 @@ int play_round(int guess)
 
   int computer_guess;
   int prediction_ret = predict(HISTORY);
-  cout << "prediction ret: " << prediction_ret << endl;
+  //cout << "prediction ret: " << prediction_ret << endl;
   switch(prediction_ret)
   {
     case ROCK:
@@ -57,7 +57,7 @@ int play_round(int guess)
 int main()
 {
   // The main function isn't very special, as you can see.
-  // This is mostly designed for the Python API in the `test`
+  // This program is mostly designed for the Python API in the `test`c
   // directory.
 
   while(true)
@@ -96,3 +96,12 @@ int main()
 }
 
 //*/
+
+// Python wrapper needs to be in C, so
+extern "C"
+{
+  int adversary_round(int player_guess)
+  {
+    return(play_round(player_guess));
+  }
+}

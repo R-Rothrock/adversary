@@ -24,7 +24,7 @@ namespace bot
     unsigned int rock_count = 0;
     unsigned int paper_count = 0;
     unsigned int scissors_count = 0;
-    
+
     for(int i : guess_history)
     {
       switch(i)
@@ -40,7 +40,7 @@ namespace bot
           break;
       }
     }
-  
+
     //cout << rock_count << endl;
     //cout << paper_count << endl;
     //cout << scissors_count << endl;
@@ -48,7 +48,7 @@ namespace bot
     int percentage_rock     = rock_count / guess_history.size() * 100;
     int percentage_paper    = paper_count / guess_history.size() * 100;
     int percentage_scissors = scissors_count / guess_history.size() * 100;
-    
+
     // at the current moment, the algorithm is really mathematically
     // straight forward, but that would be very predictable, and so
     // I want it to be a slight more cunning.
@@ -62,7 +62,7 @@ namespace bot
     if(guess_history[size - 1] == guess_history[size - 2])
     {
       srand(time(0)); // RNG for factor definition.
-      
+
       if(guess_history[size - 1] == guess_history[size - 3])
       {
         factor = rand() % 20;
@@ -70,7 +70,7 @@ namespace bot
       {
         factor = rand() % 30;
       }
-      
+
       switch(guess_history[size - 1])
       {
         case 1:
@@ -105,7 +105,7 @@ namespace bot
     //cout << percentage_rock << endl;
     //cout << percentage_paper << endl;
     //cout << percentage_scissors << endl;
-    
+
     if(percentage_rock > percentage_paper
     && percentage_rock > percentage_scissors)
     {

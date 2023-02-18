@@ -10,6 +10,14 @@ OPTIONS  = (ROCK, PAPER, SCISSORS)
 
 player_guess = 0
 
+# must initialize GUI up here
+win = tk.Tk()
+win.geometry("300x300")
+
+computer_repr = tk.StringVar()
+guess_repr    = tk.StringVar()
+res_repr      = tk.StringVar()
+
 # loading shared object library
 # make sure .so of adversary is compiled and inside this directory
 
@@ -42,13 +50,32 @@ def guess_scissors() -> None:
     print("[+] player guess is scissors")
 
 def eval() -> None:
-    global result
-    result = adversary(player_guess)
+    match player_guess:
+        case 1: # rock
+            guess_repr.set("your guess: rock")
+        case 2: # paper
+            guess_repr.set("your guess: paper")
+        case 3: # scissors
+            guess_repr.set("your guess: scissors")
 
-# now the GUI
+    global computer_guess
+    computer_guess = dll.adversary_bot()
+    match computer_guess:
+        case 1: # rock
+            computer_repr.set("computer guess: rock")
+        case 2: # paper
+            computer_repr.set("computer_guess: paper")
+        case 3: # scissors
+            computer_repr.set("computer_guess: scissors")
 
-win = tk.Tk()
-win.geometry("300x300")
+    eval_ret = dll.evaluate(player_guess, computer_guess)
+    match eval_ret:
+        case 1: # computer wins
+            res_repr.set("computer wins ):")
+        case 2: # player wins
+            res_repr.set("you win (:")
+        case 3: # tie
+            res_repr.set("tie ~}:")
 
 # title
 tk.Label(
@@ -82,11 +109,24 @@ tk.Button(
     win,
     text="Go",
     command=eval
-).grid(row=5, column=1, pady=10, stick=tk.W)
+).grid(row=5, column=1, pady=10, sticky=tk.W)
 
+# player guess display
 tk.Label(
     win,
-    textvariable=
-)
+    textvariable=guess_repr
+).grid(row=6, column=1)
+
+# computer guess display
+tk.Label(
+    win,
+    textvariable=computer_repr
+).grid(row=7, column=1)
+
+# evaluation display
+tk.Label(
+    win,
+    textvariable=res_repr
+).grid(row=8, column=1)
 
 win.mainloop()

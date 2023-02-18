@@ -52,8 +52,6 @@ int play_round(int guess)
   return(ret);
 }
 
-//*
-
 int main()
 {
   // The main function isn't very special, as you can see.
@@ -71,7 +69,6 @@ int main()
       nr = stoi(in);
       if(nr)
         break;
-      sleep(0.1); // problems with loop on codespace; little pause helps.
     }
 
     //cout << nr;
@@ -93,15 +90,31 @@ int main()
         break;
     }
   }
-}
 
-//*/
+  return(0);
+}
 
 // Python wrapper needs to be in C, so
 extern "C"
 {
   int adversary_round(int player_guess)
   {
+    /* DLL wrapper for `play_round`
+     */
     return(play_round(player_guess));
+  }
+
+  int adversary_bot()
+  {
+    /* DLL wrapper for `predict`
+     */
+    return(predict(HISTORY));
+  }
+
+  int evaluate(int player_guess, int computer_guess)
+  {
+    /* DLL wrapper for `eval`
+     */
+    return(eval(player_guess, computer_guess));
   }
 }

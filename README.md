@@ -1,7 +1,7 @@
 # Adversary
 
-Lightweight self-learning rock-paper-scissors engine in C++ that is designed to learn the
-moves of it's adversary over time with a simple self-made AI. Development of this project
+Lightweight "smart" rock-paper-scissors engine in C++ that is designed to learn the
+moves of it's adversary over time with a simple self-made "AI". Development of this project
 is on _Linux_, so it should work on just about any _Unix_ machine, but it won't work for
 you _Windows_ people.
 
